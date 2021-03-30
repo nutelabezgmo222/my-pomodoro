@@ -18,6 +18,7 @@ function App() {
       setTimers(timers);
     }
   }, [])
+  
   React.useEffect(() => {
     saveToLocalStorage();
   }, [themes, fonts, timers])
