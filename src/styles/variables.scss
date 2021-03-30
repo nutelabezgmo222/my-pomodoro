@@ -1,0 +1,28 @@
+
+$main-color: #eff1fa;
+$main-bg: #1e213f;
+$sub-bg: #161932;
+
+$toolbar-color: #D7E0FF;
+$toolbar-active-color: $sub-bg;
+
+$sub-color: #1e213f;
+
+$tomato: #f87070;
+$cyan: #70f3f8;
+$purple: #d881f8;
+
+.app {
+  --theme-color: #f87070;
+}
+
+.app.tomato-theme {
+  --theme-color: #f87070;
+}
+.app.cyan-theme {
+  --theme-color: #70f3f8;
+}
+.app.purple-theme {
+  --theme-color: #d881f8;
+}
+
