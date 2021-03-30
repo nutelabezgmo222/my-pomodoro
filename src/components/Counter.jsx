@@ -16,7 +16,8 @@ const Counter = ({timer = {}}) => {
           if(timer > 1) {
             return timer - 1;
           }else {
-            handleCountEnd();
+            setCountActive(false);
+            setCurrentTimer(timer.value * 60);
             return 0;
           }
         })
@@ -27,10 +28,6 @@ const Counter = ({timer = {}}) => {
 
   const onStartClick = () => {
     setCountActive(true);
-  }
-  const handleCountEnd = () => {
-    setCountActive(false);
-    setCurrentTimer(timer.value * 60);
   }
   const onPauseClick = () => {
     setCountActive(false);

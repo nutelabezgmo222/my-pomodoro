@@ -19,9 +19,14 @@ function App() {
     }
   }, [])
   
-  React.useEffect(() => {
-    saveToLocalStorage();
-  }, [themes, fonts, timers])
+  const saveToLocalStorage = () => {
+    const settings = {
+      themes, fonts, timers
+    };
+    localStorage.setItem('pomodoro-settings', JSON.stringify(settings));
+  }
+
+  React.useEffect(saveToLocalStorage, [themes, fonts, timers])
 
   const handleToolbarClick = (title) => {
     const newTimers = timers.map((item) => {
@@ -51,12 +56,6 @@ function App() {
     setTimers(() => {
       return newTimers;
     });
-  }
-  const saveToLocalStorage = () => {
-    const settings = {
-      themes, fonts, timers
-    };
-    localStorage.setItem('pomodoro-settings', JSON.stringify(settings));
   }
 
   const activeTheme = themes.find((item) => item.active);
