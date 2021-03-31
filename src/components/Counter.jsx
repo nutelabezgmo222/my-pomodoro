@@ -3,6 +3,7 @@ import React from 'react'
 const Counter = ({timer = {}}) => {
   const [currentTimer, setCurrentTimer] = React.useState(0);
   const [isCountActive, setCountActive] = React.useState(false);
+  const circleRef = React.useRef();
 
   React.useEffect(() => {
     setCountActive(false);
@@ -12,19 +13,18 @@ const Counter = ({timer = {}}) => {
   React.useEffect(() => {
     if(isCountActive) {
       const interval = setInterval(() => {
-        setCurrentTimer(timer => {
-          if(timer > 1) {
-            return timer - 1;
+        setCurrentTimer(curTimer => {
+          if(curTimer > 1) {
+            return curTimer - 1;
           }else {
             setCountActive(false);
-            setCurrentTimer(timer.value * 60);
-            return 0;
+            return timer.value*60;
           }
         })
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isCountActive])
+  }, [isCountActive, timer.value])
 
   const onStartClick = () => {
     setCountActive(true);
@@ -36,12 +36,14 @@ const Counter = ({timer = {}}) => {
   const minutes = Math.floor(currentTimer / 60) < 10 ? '0' + Math.floor(currentTimer / 60) : Math.floor(currentTimer / 60);
   const seconds = (currentTimer % 60) < 10 ? '0' + (currentTimer % 60) : (currentTimer % 60);
   const difference = (timer.value * 60 - currentTimer) / (timer.value*60);
-
   return (
     <div className="counter">
       <div className="counter__wrapper">
-        <svg id="counter-timer">
-          <circle strokeDashoffset={1070*difference} cx="50%" cy="50%" r="170"></circle>
+        <svg id="counter-timer" >
+          <circle ref={circleRef} 
+                  strokeDashoffset={`calc((50% - 20px)*2*3.14159*${difference})`} 
+                  strokeDasharray={"calc((50% - 20px)*2*3.14159)"} 
+                  cx="50%" cy="50%" r="calc(50% - 20px)"></circle>
         </svg>
         <div className="counter__value-box">
            <p className="counter__time">{minutes}:{seconds}</p>
@@ -56,5 +58,6 @@ const Counter = ({timer = {}}) => {
     </div>
   )
 }
+
 
 export default Counter
