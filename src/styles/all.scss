@@ -373,6 +373,15 @@ ul {
 
 @media (max-width: 550px) {
   .app{
+    padding: 100px 0;
+    .toolbar {
+      .toolbar__list {
+        li {
+          padding: 12px 15px;
+          font-size: 12px;
+        }
+      }
+    }
     .settings {
       position: absolute;
       .settings__wrapper{
